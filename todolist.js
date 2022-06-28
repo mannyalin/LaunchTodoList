@@ -123,10 +123,23 @@ class TodoList {
   }
 
   markDone(title) {
-    let todoSameTitle = this.filter(todo => todo.getTitle() === title)
-    if(todoSameTitle.todos !== []) todoSameTitle.markDone();
+    let todo = this.findByTitle(title);
+    if (todo !== undefined) {
+      todo.markDone();
+    }
   }
 
+  markAllDone() {
+    this.forEach(todo => todo.markDone());
+  }
+
+  markAllUndone() {
+    this.forEach(todo => todo.markUndone());
+  }
+
+  toArray() {
+    return this.todos.slice()
+  }
 }
 
 
@@ -149,5 +162,9 @@ list.markDoneAt(0);
 
 list.markDone('Clean');
 
-console.log(list);
-console.log(list.allNotDone())
+// console.log(list);
+// console.log(list.allNotDone())
+let newArray = list.toArray();
+newArray.push('hello');
+console.log(list)
+console.log(newArray)
